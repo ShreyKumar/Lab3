@@ -8,37 +8,57 @@ z2
 !i10f 100
 cModel Technology
 dC:/cygwin64/home/Shreyansh/UofT/CSC258/summer/lab3/part2
-vfull_adder
-Z0 !s110 1496959008
+valu
+Z0 !s110 1496959613
 !i10b 1
-!s100 R0OP>fcYP[A8PeO_T]U?o2
-I2iTNU4PdiW`KR5`U;OP812
+!s100 W[;h6kRLgWU=KLB20JGT<0
+I:VldO4J5j8?6JVHf9m0U`3
 Z1 VDg1SIo80bB@j0V0VzS_@n1
 Z2 dC:/cygwin64/home/Shreyansh/UofT/CSC258/summer/lab3/part3
-Z3 w1496959001
+Z3 w1496959608
 Z4 8alu.v
 Z5 Falu.v
-L0 82
+L0 1
 Z6 OV;L;10.4d;61
 r1
 !s85 0
 31
-Z7 !s108 1496959008.000000
+Z7 !s108 1496959613.000000
 Z8 !s107 alu.v|
 Z9 !s90 -reportprogress|300|-timescale|1ns/1ns|alu.v|
 !i113 1
 Z10 o-timescale 1ns/1ns
-vripple
+vfull_adder
 R0
 !i10b 1
-!s100 fhP4Id5UJIeB5F_5Dk=T90
-I2m:g?APRF5l7ElGD]mk2H3
+!s100 FDe<:@P6C94DTh6K?m]fS2
+IRQUVnCaFA@X5WhDe`[1zI0
 R1
 R2
 R3
 R4
 R5
-L0 38
+L0 85
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+vripple
+R0
+!i10b 1
+!s100 mCUzGNjDN03bCf8b5`AKb3
+IM3;A;f?446[Y96i@IQ=PB0
+R1
+R2
+R3
+R4
+R5
+L0 41
 R6
 r1
 !s85 0

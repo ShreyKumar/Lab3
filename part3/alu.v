@@ -10,6 +10,7 @@ module alu(LEDR, SW, KEY, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
 	output HEX5;
 
 	reg[7:0] Out;
+	reg[3:0] Temp;
 
 	ripple u0 (
 		.A(SW[3:0]),
@@ -20,7 +21,7 @@ module alu(LEDR, SW, KEY, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
 	always @(*)
 	begin
 		case(KEY[2:0])
-			3'b000: LEDR[3:0] = Out[3:0]; // case 0
+			3'b000: Temp = Out[3:0]; // case 0
 			3'b001: Out = 0; // case 1
 			3'b010: Out = 0; // case 2
 			3'b011: Out = 0; // case 3
@@ -29,6 +30,8 @@ module alu(LEDR, SW, KEY, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
 			default: Out = 0; //default case		
 		endcase
 	end
+
+	assign LEDR[3:0] = Temp;
 
 
 endmodule
