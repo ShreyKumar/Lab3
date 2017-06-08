@@ -9,7 +9,7 @@ module alu(LEDR, SW, KEY, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
 	output HEX4;
 	output HEX5;
 
-	reg[7:0] Out;
+	wire[7:0] Out;
 	reg[7:0] Temp;
 
 	ripple u0 (
@@ -22,12 +22,12 @@ module alu(LEDR, SW, KEY, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
 	begin
 		case(KEY[2:0])
 			3'b000: Temp = Out; // case 0
-			3'b001: Out = 0; // case 1
-			3'b010: Out = 0; // case 2
-			3'b011: Out = 0; // case 3
-			3'b100: Out = 0; // case 4
-			3'b101: Out = 0; //case 5
-			default: Out = 0; //default case		
+			3'b001: Temp = 8'b00000000; // case 1
+			3'b010: Temp = 8'b00000000; // case 2
+			3'b011: Temp = 8'b00000000; // case 3
+			3'b100: Temp = 8'b00000000; // case 4
+			3'b101: Temp = 8'b00000000; //case 5
+			default: Temp = 8'b00000000; //default case		
 		endcase
 	end
 
@@ -42,17 +42,18 @@ module ripple(A, B, Sum);
 	input[3:0] A;
 	input[3:0] B;
 	output[7:0] Sum;
+	wire dummy;
 
 	wire w01;
 	wire w12;
 	wire w23;
-
+	
 	full_adder u0 (
 		.sum(Sum[0]),
 		.cout(w01),
 		.a(A[0]),
 		.b(B[0]),
-		.cin(0)
+		.cin()
 	);
 
 	full_adder u1 (
@@ -73,13 +74,13 @@ module ripple(A, B, Sum);
 
 	full_adder u3 (
 		.sum(Sum[3]),
-		.cout(0),
+		.cout(dummy),
 		.a(A[3]),
 		.b(B[3]),
 		.cin(w23)
 	);
 
-	assign Sum[4:7] = 4'b0000;
+	assign Sum[7:4] = 4'b0000;
 	
 endmodule
 
