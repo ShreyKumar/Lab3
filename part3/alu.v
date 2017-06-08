@@ -19,38 +19,38 @@ module alu(LEDR, SW, KEY, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
 	reg[7:0] Out;
 
 	ripple u0 (
-		.A(SW[3:0]),
+		.A(SW[7:4]),
 		.B(4'b0001),
 		.Sum(Case0[7:0])
 	);
 
 	ripple u1 (
-		.A(SW[3:0]),
-		.B(SW[7:4]),
+		.A(SW[7:4]),
+		.B(SW[3:0]),
 		.Sum(Case1[7:0])
 	);
 
 	verisum u2 (
-		.A(SW[3:0]),
-		.B(SW[7:4]),
+		.A(SW[7:4]),
+		.B(SW[3:0]),
 		.Sum(Case2[7:0])
 	);
 
 	xororor u3 (
-		.A(SW[3:0]),
-		.B(SW[7:4]),
+		.A(SW[7:4]),
+		.B(SW[3:0]),
 		.Result(Case3[7:0])
 	);
 
 	reductionor u4 (
-		.A(SW[3:0]),
-		.B(SW[7:4]),
+		.A(SW[7:4]),
+		.B(SW[3:0]),
 		.Result(Case4[7:0])
 	);
 
 	concat u5 (
-		.A(SW[3:0]),
-		.B(SW[7:4]),
+		.A(SW[7:4]),
+		.B(SW[3:0]),
 		.Result(Case5[7:0])
 	);
 	
@@ -117,13 +117,12 @@ module ripple(A, B, Sum);
 	input[3:0] A;
 	input[3:0] B;
 	output[7:0] Sum;
-
 	wire dummy;
-
+	
 	wire w01;
 	wire w12;
 	wire w23;
-
+	
 	full_adder u0 (
 		.sum(Sum[0]),
 		.cout(w01),
