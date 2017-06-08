@@ -9,33 +9,108 @@ module alu(LEDR, SW, KEY, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
 	output HEX4;
 	output HEX5;
 
-	wire[7:0] Out;
-	reg[7:0] Temp;
+	wire[7:0] Case0;
+	wire[7:0] Case1;
+	wire[7:0] Case2;
+	wire[7:0] Case3;
+	wire[7:0] Case4;
+	wire[7:0] Case5;
+
+	reg[7:0] Out;
 
 	ripple u0 (
-		.A(SW[3:0]),
-		.B(SW[7:4]),
-		.Sum(Out)
+		.A(SW[7:4]),
+		.B(4'b0001),
+		.Sum(Case0[7:0])
 	);
 
+	ripple u1 (
+		.A(SW[7:4]),
+		.B(SW[3:0]),
+		.Sum(Case1[7:0])
+	);
+
+	verisum u2 (
+		.A(SW[7:4]),
+		.B(SW[3:0]),
+		.Sum(Case2[7:0])
+	);
+
+	xororor u3 (
+		.A(SW[7:4]),
+		.B(SW[3:0]),
+		.Result(Case3[7:0])
+	);
+
+	reductionor u4 (
+		.A(SW[7:4]),
+		.B(SW[3:0]),
+		.Result(Case4[7:0])
+	);
+
+	concat u5 (
+		.A(SW[7:4]),
+		.B(SW[3:0]),
+		.Result(Case5[7:0])
+	);
+	
 	always @(*)
 	begin
 		case(KEY[2:0])
-			3'b000: Temp = Out; // case 0
-			3'b001: Temp = 8'b00000000; // case 1
-			3'b010: Temp = 8'b00000000; // case 2
-			3'b011: Temp = 8'b00000000; // case 3
-			3'b100: Temp = 8'b00000000; // case 4
-			3'b101: Temp = 8'b00000000; //case 5
-			default: Temp = 8'b00000000; //default case		
+			3'b000: Out = Case0; // case 0
+			3'b001: Out = Case1; // case 1
+			3'b010: Out = Case2; // case 2
+			3'b011: Out = Case3; // case 3
+			3'b100: Out = Case4; // case 4
+			3'b101: Out = Case5; //case 5
+			default: Out = 8'b00000000; //default case		
 		endcase
 	end
 
-	assign LEDR = Temp;
-
+	assign LEDR = Out;
 
 endmodule
 
+
+module concat(A, B, Result);
+	input[3:0] A;
+	input[3:0] B;
+	output[7:0] Result;
+	
+	assign Result[7:0] = {A, B};
+
+endmodule
+
+
+module reductionor(A, B, Result);
+	input[3:0] A;
+	input[3:0] B;
+	output[7:0] Result;
+	
+	assign Result[0] = | {A, B};
+	assign Result[7:1] = 7'b0000000;
+
+endmodule
+
+module xororor(A, B, Result);
+	input[3:0] A;
+	input[3:0] B;
+	output[7:0] Result;
+
+	assign Result[3:0] = A^B;
+	assign Result[7:4] = A|B;
+endmodule
+
+
+
+module verisum(A, B, Sum);
+	input[3:0] A;
+	input[3:0] B;
+	output[7:0] Sum;
+	
+	assign Sum[3:0] = A + B;
+	assign Sum[7:4] = 4'b0000;
+endmodule
 
 
 module ripple(A, B, Sum);
@@ -43,7 +118,7 @@ module ripple(A, B, Sum);
 	input[3:0] B;
 	output[7:0] Sum;
 	wire dummy;
-
+	
 	wire w01;
 	wire w12;
 	wire w23;
@@ -53,7 +128,7 @@ module ripple(A, B, Sum);
 		.cout(w01),
 		.a(A[0]),
 		.b(B[0]),
-		.cin()
+		.cin(1'b0)
 	);
 
 	full_adder u1 (

@@ -25,3 +25,33 @@ force {KEY[2:0]} 2#000
 force {SW[7:4]} 2#0101
 force {SW[3:0]} 2#1101
 run 10ns
+
+force {KEY[2:0]} 2#010
+force {SW[7:4]} 2#0101
+force {SW[3:0]} 2#1101
+run 10ns
+
+force {KEY[2:0]} 2#000
+force {SW[7:4]} 2#0000
+force {SW[3:0]} 2#1101
+run 10ns
+
+force {KEY[2:0]} 2#000
+force {SW[7:4]} 2#0001
+force {SW[3:0]} 2#1100
+run 10ns
+
+force {KEY[2:0]} 2#000
+force {SW[7:4]} 2#1001
+force {SW[3:0]} 2#1000
+run 10ns
+
+force {KEY[2:0]} 2#000
+force {SW[7:4]} 2#0000
+force {SW[3:0]} 2#0000
+run 10ns
+
+force {KEY[2:0]} 2#000
+force {SW[7:4]} 2#1111
+force {SW[3:0]} 2#1111
+run 10ns
