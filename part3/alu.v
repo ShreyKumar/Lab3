@@ -57,13 +57,13 @@ module alu(LEDR, SW, KEY, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
 	always @(*)
 	begin
 		case(KEY[2:0])
-			3'b000: Temp = Case0; // case 0
-			3'b001: Temp = Case1; // case 1
-			3'b010: Temp = Case2; // case 2
-			3'b011: Temp = Case3; // case 3
-			3'b100: Temp = Case4; // case 4
-			3'b101: Temp = Case5; //case 5
-			default: Temp = 8'b00000000; //default case		
+			3'b000: Out = Case0; // case 0
+			3'b001: Out = Case1; // case 1
+			3'b010: Out = Case2; // case 2
+			3'b011: Out = Case3; // case 3
+			3'b100: Out = Case4; // case 4
+			3'b101: Out = Case5; //case 5
+			default: Out = 8'b00000000; //default case		
 		endcase
 	end
 
@@ -108,7 +108,8 @@ module verisum(A, B, Sum);
 	input[3:0] B;
 	output[7:0] Sum;
 	
-	assign Sum = A + B;
+	assign Sum[3:0] = A + B;
+	assign Sum[7:4] = 4'b0000;
 endmodule
 
 
