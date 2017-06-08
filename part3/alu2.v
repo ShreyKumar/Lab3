@@ -1,8 +1,8 @@
-module alu(LEDR, A, KEY, B, HEX1, HEX2, HEX3, HEX4, HEX5);
-	input[7:0] A;
+module alu2(LEDR, SW, KEY, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
+	input[7:0] SW;
 	input[2:0] KEY;
 	output[7:0] LEDR;
-	output B;
+	output HEX0;
 	output HEX1;
 	output HEX2;
 	output HEX3;
@@ -19,38 +19,38 @@ module alu(LEDR, A, KEY, B, HEX1, HEX2, HEX3, HEX4, HEX5);
 	reg[7:0] Out;
 
 	ripple u0 (
-		.A(A[7:4]),
+		.A(SW[7:4]),
 		.B(4'b0001),
 		.Sum(Case0[7:0])
 	);
 
 	ripple u1 (
-		.A(A[7:4]),
-		.B(A[3:0]),
+		.A(SW[7:4]),
+		.B(SW[3:0]),
 		.Sum(Case1[7:0])
 	);
 
 	verisum u2 (
-		.A(A[7:4]),
-		.B(A[3:0]),
+		.A(SW[7:4]),
+		.B(SW[3:0]),
 		.Sum(Case2[7:0])
 	);
 
 	xororor u3 (
-		.A(A[7:4]),
-		.B(A[3:0]),
+		.A(SW[7:4]),
+		.B(SW[3:0]),
 		.Result(Case3[7:0])
 	);
 
 	reductionor u4 (
-		.A(A[7:4]),
-		.B(A[3:0]),
+		.A(SW[7:4]),
+		.B(SW[3:0]),
 		.Result(Case4[7:0])
 	);
 
 	concat u5 (
-		.A(A[7:4]),
-		.B(A[3:0]),
+		.A(SW[7:4]),
+		.B(SW[3:0]),
 		.Result(Case5[7:0])
 	);
 
@@ -71,10 +71,27 @@ module alu(LEDR, A, KEY, B, HEX1, HEX2, HEX3, HEX4, HEX5);
 	assign LEDR = Out;
 
 	sevenseg u6 (
-		.A(Out[]),
-		.B(HEX[0]),
+		.Data(SW[3:0]),
+		.Display(HEX[0])
 	);
 
+	sevenseg u7 (
+		.Data(SW[7:4]),
+		.Display(HEX[2])
+	);
+
+	sevenseg u8 (
+		.Data(Out[3:0]),
+		.Display(HEX[4])
+	);
+
+	sevenseg u8 (
+		.Data(Out[7:4]),
+		.Display(HEX[4])
+	);
+
+	assign HEX1 = 7'b0000000;
+	assign HEX3 = 7'b0000000;
 
 endmodule
 
