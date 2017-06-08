@@ -1,0 +1,50 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/cygwin64/home/Shreyansh/UofT/CSC258/summer/lab3/part1
+vfull_adder
+Z0 !s110 1496955744
+!i10b 1
+!s100 aOF^L=_LE>`cNRQTPS8Q63
+IzSTJZJ4aj[d;:o70^jGDP0
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+Z2 dC:/cygwin64/home/Shreyansh/UofT/CSC258/summer/lab3/part2
+Z3 w1496954382
+Z4 8ripple.v
+Z5 Fripple.v
+L0 46
+Z6 OV;L;10.4d;61
+r1
+!s85 0
+31
+Z7 !s108 1496955743.000000
+Z8 !s107 ripple.v|
+Z9 !s90 -reportprogress|300|-timescale|1ns/1ns|ripple.v|
+!i113 1
+Z10 o-timescale 1ns/1ns
+vripple
+R0
+!i10b 1
+!s100 jcK=0bbo8U[dPnK0k7eUE2
+IHWXWEN3V5]T9A^R^R03M>2
+R1
+R2
+R3
+R4
+R5
+L0 3
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
